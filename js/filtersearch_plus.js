@@ -87,12 +87,41 @@ var searchByFilters = function(author, pages, pageOperator, date) {
 					}
 				}
 			}
-
+			else if (pageOperator == "lessthan") {
+				for (i = 0; i < gLib.myBookArr.length; i++) {
+					if (gLib.myBookArr[i].numPages < pages && gLib.myBookArr[i].pubDate == date) {
+						results.push(gLib.myBookArr[i]);
+					}
+				}
+			}
+			else {
+				for (i = 0; i < gLib.myBookArr.length; i++) {
+					if (gLib.myBookArr[i].numPages == pages && gLib.myBookArr[i].pubDate == date) {
+						results.push(gLib.myBookArr[i]);
+					}
+				}
+			}
 		}
 		else { //filter by pages only
-			for (i = 0; i < gLib.myBookArr.length; i++) {
-				if (gLib.myBookArr[i].numPages == pages) {
-					results.push(gLib.myBookArr[i]);
+			if (pageOperator == "greaterthan") {
+				for (i = 0; i < gLib.myBookArr.length; i++) {
+					if (gLib.myBookArr[i].numPages > pages) {
+						results.push(gLib.myBookArr[i]);
+					}
+				}
+			}
+			else if (pageOperator == "lessthan") {
+				for (i = 0; i < gLib.myBookArr.length; i++) {
+					if (gLib.myBookArr[i].numPages < pages) {
+						results.push(gLib.myBookArr[i]);
+					}
+				}
+			}
+			else {
+				for (i = 0; i < gLib.myBookArr.length; i++) {
+					if (gLib.myBookArr[i].numPages == pages) {
+						results.push(gLib.myBookArr[i]);
+					}
 				}
 			}
 		}
