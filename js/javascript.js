@@ -36,26 +36,22 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype.removeBookByAuthor = function(author) {
+var book = null;
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].author === author) {
       this.myBookArr.splice(i, 1);
       alert("Book(s) by " + author + " removed from the library.");
-      return true;
+      bool = true;
+      return bool;
     }
   }
   alert("There are no books in the library by this author.");
-  return false;
+  bool = false;
+  return bool;
 };
 
 Library.prototype.getRandomBook = function() {
-  var length = this.myBookArr.length;
-  if (length > 0) {
-    var index = Math.floor(Math.random() * length);
-    return this.myBookArr[index];
-  }
-  else {
-    return null;
-  }
+  this.myBookArr.length > 0 ? this.myBookArr[Math.floor(Math.random() * length)] : null;
 };
 
 Library.prototype.getBookByTitle = function(title) {
@@ -124,12 +120,12 @@ var bookNine = new Book({title: "The Quiet American", author: "Graham Greene", n
 var bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
 
 
-function populateStorage(libArray) {
-  var key = "";
-  var value = {};
-  for (i = 0; i < libArray.length; i++) {
-    key = "Book" + (i +1);
-    value = JSON.stringify(libArray[i]);
-    localStorage.setItem(key, value);
-  }
-}
+// function populateStorage(libArray) {
+//   var key = "";
+//   var value = {};
+//   for (i = 0; i < libArray.length; i++) {
+//     key = "Book" + (i +1);
+//     value = JSON.stringify(libArray[i]);
+//     localStorage.setItem(key, value);
+//   }
+// };
