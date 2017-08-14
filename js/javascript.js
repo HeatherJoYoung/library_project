@@ -56,9 +56,7 @@ Library.prototype.getRandomBook = function() {
   else {
     return null;
   }
-// var length = this.myBookArr.length;
-// return length > 0 ? this.myBookArr[Math.floor(Math.random() * length)] : null;
-  };
+};
 
 Library.prototype.getBookByTitle = function(title) {
   var books = [];
@@ -106,14 +104,13 @@ Library.prototype.getRandomAuthorName = function() {
 };
 
 var Book = function(oArgs){
-  //this.aDate = oArgs.date.split("/");
   this.title = oArgs.title;
   this.author = oArgs.author;
   this.numPages = oArgs.numPages;
-  this.pubDate = new Date(oArgs.pubDate);  //do date conversion when we add the book in as long as it's in the array as a date object //break string down
+  this.pubDate = new Date(oArgs.pubDate);  //do date conversion when adding the book in
 };
 
-var gLib = new Library(); //this is a created instance //optional, where this actually exists on the DOM
+var gLib = new Library();
 
 var bookOne = new Book(oArgs = {title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
 var bookTwo = new Book(oArgs = {title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
