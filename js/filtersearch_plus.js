@@ -20,8 +20,9 @@ var submitSearchData = function() {
 	console.log(authInput);
 	console.log(pageInput);
 	console.log(dateInput);
+	console.log(pageOperator);
 
-	searchByFilters(authInput, pageInput, dateInput);
+	searchByFilters(authInput, pageInput, pageOperator, dateInput);
 };
 
 var searchByFilters = function(author, pages, pageOperator, date) {
@@ -54,16 +55,34 @@ var searchByFilters = function(author, pages, pageOperator, date) {
 				}
  			}
 			else { //filter by author and pages
-				for (i = 0; i < gLib.myBookArr.length; i++) {
-					if (gLib.myBookArr[i].author === author && gLib.myBookArr[i].numPages == pages) {
-						results.push(gLib.myBookArr[i]);
-					}
+				console.log("I got to line 58");
+				if (pageOperator == "greaterthan") {
+					for (i = 0; i < gLib.myBookArr.length; i++) {
+						if (gLib.myBookArr[i].author === author && gLib.myBookArr[i].numPages > pages) {
+							results.push(gLib.myBookArr[i]);
+						}
+ 					}
+				}
+				else if (pageOperator == "lessthan") {
+					console.log("I got to line 67");
+					for (i = 0; i < gLib.myBookArr.length; i++) {
+						if (gLib.myBookArr[i].author === author && gLib.myBookArr[i].numPages < pages) {
+							results.push(gLib.myBookArr[i]);
+						}
+ 					}
+				}
+				else {
+					console.log("I got to line 75");
+					for (i = 0; i < gLib.myBookArr.length; i++) {
+						if (gLib.myBookArr[i].author === author && gLib.myBookArr[i].numPages == pages) {
+							results.push(gLib.myBookArr[i]);
+						}
+ 					}
 				}
 			}
 		}
 		else if(date) { //filter by author and date
-			console.log("I got to line 37.");
-			console.log(gLib.myBookArr);
+
 			for (i = 0; i < gLib.myBookArr.length; i++) {
 				if (gLib.myBookArr[i].author === author && gLib.myBookArr[i].pubDate == date) {
 					results.push(gLib.myBookArr[i]);
