@@ -5,9 +5,9 @@ var submitSearchData = function() {
 	var pageInput = document.getElementById("pages").value ? document.getElementById("pages").value : null;
 	var dateInput = document.getElementById("date").value ? new Date(document.getElementById("date").value): null;
 
-	console.log(authInput);
-	console.log(pageInput);
-	console.log(dateInput);
+	// console.log(authInput);
+	// console.log(pageInput);
+	// console.log(dateInput);
 
 	searchByFilters(authInput, pageInput, dateInput);
 };

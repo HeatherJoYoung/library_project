@@ -91,10 +91,10 @@ Library.prototype.getAuthors = function() {
       if (this.myBookArr[i].author === authorArray[j]) {
         console.log(this.myBookArr[i].author);
         break dance;
-        }
       }
-      authorArray.push(this.myBookArr[i].author);
     }
+    authorArray.push(this.myBookArr[i].author);
+  }
     return authorArray;
 };
 
