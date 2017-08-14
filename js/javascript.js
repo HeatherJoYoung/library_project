@@ -60,9 +60,9 @@ Library.prototype.getRandomBook = function() {
 
 Library.prototype.getBookByTitle = function(title) {
   var books = [];
-  //var reg = new RegExp(title, "gi");
+  var reg = new RegExp(title, "gi");
   for (i = 0; i < this.myBookArr.length; i++) {
-    //if (this.myBookArr[i].title.match(reg)) {
+    if (this.myBookArr[i].title.match(reg)) {
       if (this.myBookArr[i].title === title) {
       books.push(this.myBookArr[i]);
     }
@@ -112,16 +112,16 @@ var Book = function(oArgs){
 
 var gLib = new Library();
 
-var bookOne = new Book(oArgs = {title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
-var bookTwo = new Book(oArgs = {title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
-var bookThree = new Book(oArgs = {title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "11/01/1939"});
-var bookFour = new Book(oArgs = {title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "09/10/1939"});
-var bookFive = new Book(oArgs = {title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "12/21/2005"});
-var bookSix = new Book(oArgs = {title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "12/07/1980"});
-var bookSeven = new Book(oArgs = {title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "08/31/1993"});
-var bookEight = new Book(oArgs = {title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "07/01/1975"});
-var bookNine = new Book(oArgs = {title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "12/10/1955"});
-var bookTen = new Book(oArgs = {title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
+var bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
+var bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
+var bookThree = new Book({title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "11/01/1939"});
+var bookFour = new Book({title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "09/10/1939"});
+var bookFive = new Book({title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "12/21/2005"});
+var bookSix = new Book({title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "12/07/1980"});
+var bookSeven = new Book({title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "08/31/1993"});
+var bookEight = new Book({title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "07/01/1975"});
+var bookNine = new Book({title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "12/10/1955"});
+var bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
 
 
 function populateStorage(libArray) {
