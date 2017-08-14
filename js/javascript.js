@@ -2,12 +2,8 @@ var Library = function() {};
 
 Library.prototype.myBookArr = [];
 
-changeDateToObject = function(pubDate) {
-
-};
 
 Library.prototype.addBook = function(book) {
-  //console.log(this.myBookArr);
   for (j = 0; j < this.myBookArr.length; j++) {
     if (this.myBookArr[j].title === book.title) {
       return false;
