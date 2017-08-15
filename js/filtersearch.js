@@ -1,19 +1,10 @@
 
 
 var submitSearchData = function() {
-<<<<<<< HEAD
+
 	var authInput = document.getElementById("author").value;
 	var pageInput = document.getElementById("pages").value;
 	var dateInput = document.getElementById("date").value;
-=======
-	var authInput = document.getElementById("author").value ? document.getElementById("author").value : null;
-	var pageInput = document.getElementById("pages").value ? document.getElementById("pages").value : null;
-	var dateInput = document.getElementById("date").value ? new Date(document.getElementById("date").value): null;
-
-	// console.log(authInput);
-	// console.log(pageInput);
-	// console.log(dateInput);
->>>>>>> 17bf9852a533883344aea14ba18d43b453324167
 
 	searchByFilters(authInput, pageInput, dateInput);
 };
