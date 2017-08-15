@@ -2,7 +2,6 @@ var Library = function() {};
 
 Library.prototype.myBookArr = [];
 
-
 Library.prototype.addBook = function(book) {
   for (j = 0; j < this.myBookArr.length; j++) {
     if (this.myBookArr[j].title === book.title) {
@@ -61,7 +60,7 @@ Library.prototype.getRandomBook = function() {
   else {
     return null;
   }
-  };
+};
 
 Library.prototype.getBookByTitle = function(title) {
   var books = [];
@@ -112,27 +111,69 @@ var Book = function(oArgs){
 };
 
 
-var gLib = new Library();
+window.bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
+window.bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
+window.bookThree = new Book({title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "11/01/1939"});
+window.bookFour = new Book({title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "09/10/1939"});
+window.bookFive = new Book({title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "12/21/2005"});
+window.bookSix = new Book({title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "12/07/1980"});
+window.bookSeven = new Book({title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "08/31/1993"});
+window.bookEight = new Book({title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "07/01/1975"});
+window.bookNine = new Book({title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "12/10/1955"});
+window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
 
 
-var bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
-var bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
-var bookThree = new Book({title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "11/01/1939"});
-var bookFour = new Book({title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "09/10/1939"});
-var bookFive = new Book({title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "12/21/2005"});
-var bookSix = new Book({title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "12/07/1980"});
-var bookSeven = new Book({title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "08/31/1993"});
-var bookEight = new Book({title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "07/01/1975"});
-var bookNine = new Book({title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "12/10/1955"});
-var bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
+Library.prototype.populateStorage = function(key, libArray) {
+    localStorage.setItem(key, JSON.stringify(libArray));
+  };
 
+//document ready function
+$(function (){
+  window.vLib = new Library();
+  window.vLib.init();
+});
 
-function populateStorage(libArray) {
-  var key = "";
-  var value = {};
-  for (i = 0; i < libArray.length; i++) {
-    key = "Book" + (i +1);
-    value = JSON.stringify(libArray[i]);
-    localStorage.setItem(key, value);
-  }
-}
+// var vLib = new Library();
+
+Library.prototype.init = function() {
+// set up bind events
+  this._bindEvents();
+  //call function to populate book array if local storage has our authorArray
+  this._checkLocalStorage();
+  //you can also set commonly used selectors in the init function (i.e., this.$container = (#Container))
+};
+
+Library.prototype._bindEvents = function() {
+  $("button.get-my-name").on("click", $.proxy(this._handleGetMyName, this));
+};
+
+Library.prototype._checkLocalStorage = function() {
+  if(localStorage) {
+    var vLibrary = JSON.parse(localStorage.getItem("vLibrary"));
+    console.log(vLibrary);
+    this._populateCatalog(vLibrary);
+  };
+};
+
+Library.prototype._populateCatalog = function(library) {
+  var $table = $("table");
+  for(i = 0; i < library.length; i++) {
+    //var pubDate = library[i].pubDate;
+    var newRow = $("<tr>");
+    var newTitle = $("<td>").text(library[i].title);
+    var newAuthor = $("<td>").text(library[i].author);
+    var newPages = $("<td>").text(library[i].numPages);
+    var newPubDate = $("<td>").text(library[i].pubDate);
+    newRow.append(newTitle);
+    newRow.append(newAuthor);
+    newRow.append(newPages);
+    newRow.append(newPubDate);
+    $table.append(newRow);
+
+  };
+};
+
+Library.prototype._handleGetMyName = function() {
+  var inputVal = $("input.my-name").val();
+  alert(val);
+};

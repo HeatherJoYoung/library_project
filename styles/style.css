@@ -1,0 +1,37 @@
+
+body {
+  background-color: DarkGray;
+}
+
+header {
+  background-image: url("../images/dmitrij-paskevic-44124-sm.jpg");
+  height: 200px;
+  padding: 30px;
+  margin: 0 0 20px 0;
+}
+
+header .title {
+  color: white;
+  font-size: 5em;
+  font-family: Georgia, serif;
+  padding: 0;
+}
+
+.jumbotron {
+  margin: 2%;
+  background-color: Gainsboro;
+  min-height: 200px;
+}
+
+.well {
+  margin: 5%;
+  min-height: 200px;
+}
+
+.center {
+  margin-left: 5%;
+}
+
+.lower .left {
+  margin-left: 2%;
+}

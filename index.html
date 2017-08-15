@@ -2,21 +2,63 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>My Library</title>
-
+    <title>My Library Project</title>
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
-    <h1>My Library</h1>
-      <form class="search" action="index.html" method="post" id="searchForm">
-        Author name: <input type="text" name="author" id="author"><br>
-        <!-- Greater than <input type="radio" name="greater" value="greaterthan" id="greater">
-        or less than <input type="radio" name="less" value="lessthan" id="less"> -->
-        <input type="number" name="numPages" id="pages"> number of pages.<br>
-        Published on <input type="text" name="pubDate" id="date"><br>
-        <input type="button" onclick="submitSearchData()" value="Submit">
-      </form>
+    <div class="container-fluid">
+      <header class="row">
+        <h1 class="col-md-3 col-md-offset-1 title">v.Library</h1>
+      </header>
+      <div class="row">
+        <div class="jumbotron col-md-6">
+          <h2>Catalog</h2>
+          <div class=".table-responsive">
+            <table class="table table-hover">
+              <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Pages</th>
+                <th>Published</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <div class="well">
+            <h2>Results</h2>
+          </div>
+            <div class="row">
+              <div class="center col-md-7">
+                <h2>Search</h2>
+                <form class="search" action="index.html" method="post" id="searchForm">
+                  Author name: <input type="text" name="author" id="author"><br>
+                  <!-- Greater than <input type="radio" name="greater" value="greaterthan" id="greater">
+                  or less than <input type="radio" name="less" value="lessthan" id="less"> -->
+                  <input type="number" name="numPages" id="pages"> number of pages.<br>
+                  Published on <input type="text" name="pubDate" id="date"><br>
+                  <input type="button" onclick="submitSearchData()" value="Submit">
+                </form>
+              </div>
+              <div class="right col-md-4">
+                <h2>Random</h2>
+                <p>Don't know what to read? Pull a random book or random author.</p>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row lower">
+        <div class="col-md-6 left">
+          <h2>Manage My Library</h2>
+        </div>
+
+      </div>
+
     <!-- <script src="js/filtersearch_plus.js"></script> -->
+    <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/filtersearch.js"></script>
     <script src="js/javascript.js"></script>
+  </container>
   </body>
 </html>
