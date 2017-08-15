@@ -17,11 +17,6 @@ var submitSearchData = function() {
 	var pageOperator = pageOperatorFunction();
 	var dateInput = document.getElementById("date").value ? new Date(document.getElementById("date").value): null;
 
-	// console.log(authInput);
-	// console.log(pageInput);
-	// console.log(dateInput);
-	// console.log(pageOperator);
-
 	searchByFilters(authInput, pageInput, pageOperator, dateInput);
 };
 

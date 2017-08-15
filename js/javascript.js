@@ -133,24 +133,23 @@ $(function (){
   window.vLib.init();
 });
 
-// var vLib = new Library();
-
 Library.prototype.init = function() {
 // set up bind events
   this._bindEvents();
-  //call function to populate book array if local storage has our authorArray
   this._checkLocalStorage();
   //you can also set commonly used selectors in the init function (i.e., this.$container = (#Container))
 };
 
 Library.prototype._bindEvents = function() {
-  $("button.get-my-name").on("click", $.proxy(this._handleGetMyName, this));
+  $("addbook").on("click", $.proxy(this.newFunction, this));
+  $("addlist").on("click", $.proxy(this.newFunction, this));
+  $("removetitle").on("click", $.proxy(this.newFunction, this));
+  $("removeauthor").on("click", $.proxy(this.newFunction, this));
 };
 
 Library.prototype._checkLocalStorage = function() {
   if(localStorage) {
     var vLibrary = JSON.parse(localStorage.getItem("vLibrary"));
-    console.log(vLibrary);
     this._populateCatalog(vLibrary);
   };
 };
@@ -158,7 +157,6 @@ Library.prototype._checkLocalStorage = function() {
 Library.prototype._populateCatalog = function(library) {
   var $table = $("table");
   for(i = 0; i < library.length; i++) {
-    //var pubDate = library[i].pubDate;
     var newRow = $("<tr>");
     var newTitle = $("<td>").text(library[i].title);
     var newAuthor = $("<td>").text(library[i].author);

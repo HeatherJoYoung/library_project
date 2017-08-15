@@ -13,7 +13,7 @@
       </header>
       <div class="row">
         <div class="jumbotron col-md-6">
-          <h2>Catalog</h2>
+          <h2>My Catalog</h2>
           <div class=".table-responsive">
             <table class="table table-hover">
               <tr>
@@ -26,11 +26,11 @@
           </div>
         </div>
         <div class="col-md-5">
-          <div class="well">
+          <div class="well results">
             <h2>Results</h2>
           </div>
             <div class="row">
-              <div class="center col-md-7">
+              <div class="center col-md-6 col-md-offset-1">
                 <h2>Search</h2>
                 <form class="search" action="index.html" method="post" id="searchForm">
                   Author name: <input type="text" name="author" id="author"><br>
@@ -49,10 +49,19 @@
         </div>
       </div>
       <div class="row lower">
-        <div class="col-md-6 left">
+        <div class="well col-md-6 left">
           <h2>Manage My Library</h2>
+          <input type="submit" class="btn btn-primary btn-md addbook" value="Add Book">
+          <input type="submit" class="btn btn-success btn-md addbooks" value="Add Books">
+          <input type="submit" class="btn btn-warning btn-md removetitle" value="Remove Title">
+          <input type="submit" class="btn btn-danger btn-md removeauthor" value="Remove Author">
+          <form class="manage" action="index.html" method="post">
+              <input type="text" name="title" placeholder="title">
+              <input type="text" name="author" placeholder="author">
+              <input type="text" name="pages" placeholder="# of pages">
+              <input type="text" name="date" placeholder="publication date">
+          </form>
         </div>
-
       </div>
 
     <!-- <script src="js/filtersearch_plus.js"></script> -->

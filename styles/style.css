@@ -26,12 +26,19 @@ header .title {
 .well {
   margin: 5%;
   min-height: 200px;
+  background-color: black;
+  color: white;
 }
 
-.center {
-  margin-left: 5%;
+.lower .well {
+  margin: 0;
 }
 
 .lower .left {
   margin-left: 2%;
+}
+
+form .manage {
+  margin-top: 5%;
+  padding-top: 20px;
 }
