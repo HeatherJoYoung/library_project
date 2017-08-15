@@ -2,9 +2,6 @@ var Library = function() {};
 
 Library.prototype.myBookArr = [];
 
-changeDateToObject = function(pubDate) {
-
-};
 
 Library.prototype.addBook = function(book) {
   for (j = 0; j < this.myBookArr.length; j++) {
@@ -39,11 +36,16 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype.removeBookByAuthor = function(author) {
+<<<<<<< HEAD
   var booksRemoved = [];
+=======
+var book = null;
+>>>>>>> 17bf9852a533883344aea14ba18d43b453324167
   for (i = 0; i < this.myBookArr.length; i++) {
     if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) > -1 && author) {
       booksRemoved.push(this.myBookArr[i]);
       this.myBookArr.splice(i, 1);
+<<<<<<< HEAD
     }
   }
   if (booksRemoved.length > 0) {
@@ -70,6 +72,28 @@ Library.prototype.getBookByTitle = function(title) {
   var books = [];
   for (i = 0; i < this.myBookArr.length; i++) {
       if (this.myBookArr[i].title.toLowerCase().indexOf(title.toLowerCase()) > -1 && title) {
+=======
+      alert("Book(s) by " + author + " removed from the library.");
+      bool = true;
+      return bool;
+    }
+  }
+  alert("There are no books in the library by this author.");
+  bool = false;
+  return bool;
+};
+
+Library.prototype.getRandomBook = function() {
+  this.myBookArr.length > 0 ? this.myBookArr[Math.floor(Math.random() * length)] : null;
+};
+
+Library.prototype.getBookByTitle = function(title) {
+  var books = [];
+  var reg = new RegExp(title, "gi");
+  for (i = 0; i < this.myBookArr.length; i++) {
+    if (this.myBookArr[i].title.match(reg)) {
+      if (this.myBookArr[i].title === title) {
+>>>>>>> 17bf9852a533883344aea14ba18d43b453324167
       books.push(this.myBookArr[i]);
     }
   }
@@ -96,10 +120,10 @@ Library.prototype.getAuthors = function() {
       if (this.myBookArr[i].author === authorArray[j]) {
         console.log(this.myBookArr[i].author);
         break dance;
-        }
       }
-      authorArray.push(this.myBookArr[i].author);
     }
+    authorArray.push(this.myBookArr[i].author);
+  }
     return authorArray;
 };
 
@@ -108,14 +132,17 @@ Library.prototype.getRandomAuthorName = function() {
 };
 
 var Book = function(oArgs){
-  //this.aDate = oArgs.date.split("/");
   this.title = oArgs.title;
   this.author = oArgs.author;
   this.numPages = oArgs.numPages;
-  this.pubDate = new Date(oArgs.pubDate);  //do date conversion when we add the book in as long as it's in the array as a date object //break string down
+  this.pubDate = new Date(oArgs.pubDate);  //do date conversion when adding the book in
 };
 
+<<<<<<< HEAD
 var gLib = new Library(); //this is a created instance //optional, where this actually exists on the DOM
+=======
+var gLib = new Library();
+>>>>>>> 17bf9852a533883344aea14ba18d43b453324167
 
 var bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
 var bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
@@ -129,6 +156,7 @@ var bookNine = new Book({title: "The Quiet American", author: "Graham Greene", n
 var bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
 
 
+<<<<<<< HEAD
 function populateStorage(libArray) {
   var key = "";
   var value = {};
@@ -138,3 +166,14 @@ function populateStorage(libArray) {
     localStorage.setItem(key, value);
   }
 }
+=======
+// function populateStorage(libArray) {
+//   var key = "";
+//   var value = {};
+//   for (i = 0; i < libArray.length; i++) {
+//     key = "Book" + (i +1);
+//     value = JSON.stringify(libArray[i]);
+//     localStorage.setItem(key, value);
+//   }
+// };
+>>>>>>> 17bf9852a533883344aea14ba18d43b453324167
