@@ -1,10 +1,9 @@
 
-
-var submitSearchData = function() {
-
-  var titleInput = $("#srch-title").value;
-	var authInput = $("#srch-author").value;
-	var pageInput = $("#srch-pages").value;
+Library.prototype._submitSearchData = function() {
+  console.log("I made it this far.");
+  // var titleInput = $("#srch-title").val();
+	// var authInput = $("#srch-author").val();
+	// var pageInput = $("#srch-pages").val();
   function pageOperatorFunction() {
 		if(document.getElementById("less").checked) {
 				return ("lessthan");
@@ -17,129 +16,78 @@ var submitSearchData = function() {
 			}
 		};
   var pageOperator = pageOperatorFunction();
-	var dateInput = $("#srch-pubdate").value;
+	// var dateInput = $("#srch-pubdate").val();
   function dateOperatorFunction() {
-		if(document.getElementById("less").checked) {
+		if(document.getElementById("before").checked) {
 				return ("lessthan");
 			}
-			else if (document.getElementById("greater").checked) {
+			else if (document.getElementById("after").checked) {
 				return ("greaterthan");
 			}
 			else {
 				return ("equals");
 			}
 		};
-  var dateOperator = ;
-  var library = library;
+  var dateOperator = dateOperatorFunction();
+  var searchBook = {
+    title: $("#srch-title").val(),
+    author: $("#srch-author").val(),
+    pageOp: pageOperator,
+    pages: $("#srch-pages").val(),
+    dateOp: dateOperator,
+    date: $("#srch-pubdate").val()
+  };
 
-	searchByFilters(titleInput, authInput, pageInput, pageOperator, dateInput, dateOperator, library);
+  //var searchObj = new searchBook (titleInput, authInput, pageOperator, pageInput, dateOperator, dateInput);
+	this._compare(searchBook);
+  console.log(searchBook);
 };
 
-var searchByFilters = function(title, author, pages, pageOp, date, dateOp, library) {
-
-	var results = [];
-
-  if (title && author && pages && date) { // title and author and pages and date
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title && library[i].author === author && library[i].numPages == pages && library[i].pubDate == date) {
-				results.push(library[i]);
-      }
+Library.prototype._compare = function(obj) {
+  var title = true;
+  var author = true;
+  var pages = true;
+  var date = true;
+  var array = this.myBookArr;
+  var results = [];
+  for (i = 0; i < array.length; i++) {
+    if (obj.title && !this.getBookByTitle) {
+      title = false;
+    }
+    if (obj.author && !this.getBooksByAuthor) {
+      author = false;
+    }
+    if (obj.pages && obj.pages == !array[i].numPages) {
+      pages = false;
+    }
+    if (obj.date && obj.date == !array[i].pubDate) {
+      date = false;
+    }
+    if (title && author && pages && date) {
+      results.push(array[i]);
+      console.log(array[i]);
     }
   }
-  if (title && author && pages &&!date) { //title and author and pages
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title && library[i].author === author && library[i].numPages == pages) {
-				results.push(library[i]);
-      }
-    }
+  console.log(results);
+  if (results.length > 0) {
+    this._populateSearchResults(results);
   }
-  if (title &&!author && pages && date) { //title and pages and date
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title && library[i].numPages == pages && library[i].pubDate == date) {
-				results.push(library[i]);
-      }
-    }
+  else {
   }
-  if (title && author && !pages && !date) { //title and author
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title && library[i].author === author) {
-				results.push(library[i]);
-      }
-    }
-  }
-  if (title && !author && pages && !date) { //title and pages
-    for (i = 0; i < library.length; i++) {
-      if (library[i].title === title && library[i].numPages == pages) {
-        results.push(library[i]);
-      }
-    }
-  }
-  if (title && !author && !pages && date) { //title and date
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title && library[i].pubDate == date) {
-				results.push(library[i]);
-      }
-    }
-  }
-  if (title && !author && !pages && !date) { // title only
-    for (i = 0; i < library.length; i++) {
-			if (library[i].title === title) {
-				results.push(library[i]);
-      }
-    }
-  }
-  if (!title && author && pages && date) {
-		for (i = 0; i < library.length; i++) {
-			if (library[i].author === author && library[i].numPages == pages && library[i].pubDate == date) {
-				results.push(library[i]);
-			}
-		}
-	}
-	if (!title && author && pages && !date) { //filter by author and pages
-		for (i = 0; i < library.length; i++) {
-			if (library[i].author === author && library[i].numPages == pages) {
-						results.push(library[i]);
-			}
-		}
-	}
-	if (!title && author && !pages && date) { //filter by author and date
-		for (i = 0; i < library.length; i++) {
-			if (library[i].author === author && library[i].pubDate == date) {
-				results.push(library[i]);
-			}
-		}
-	}
-	if (!title && author && !pages && !date) { //filter by author only
-    for (i = 0; i < library.length; i++) {
-			if (library[i].author === author) {
-				results.push(library[i]);
-			}
-    }
-  }
-	if (!author && !!title && pages && date) { // filter by pages and date
-		for (i = 0; i < library.length; i++) {
-			if (library[i].numPages == pages && library[i].pubDate == date) {
-				results.push(library[i]);
-			}
-		}
-	}
-	if (!author && !title && pages && !date) { //filter by pages only
-		for (i = 0; i < library.length; i++) {
-			if (library[i].numPages == pages) {
-				results.push(library[i]);
-			}
-		}
-	}
-	if (!author && !title && !pages && date) { // filter by date only
-		for (i = 0; i < library.length; i++) {
-			if (library[i].pubDate == date) {
-				results.push(library[i]);
-			}
-		}
-	}
-if(results) {
-  return results;
-} else {
-  return ("No books found.")
 }
+
+Library.prototype._populateSearchResults = function(results) {
+  var $table = $(".results-table");
+  for(i = 0; i < results.length; i++) {
+    var newRow = $("<tr>");
+    var newTitle = $("<td>").text(results[i].title);
+    var newAuthor = $("<td>").text(results[i].author);
+    var newPages = $("<td>").text(results[i].numPages);
+    var newPubDate = $("<td>").text(results[i].pubDate);
+    newRow.append(newTitle);
+    newRow.append(newAuthor);
+    newRow.append(newPages);
+    newRow.append(newPubDate);
+    $table.append(newRow);
+  };
 };
