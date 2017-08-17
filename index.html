@@ -27,40 +27,85 @@
         </div>
         <div class="col-md-5">
           <div class="well results">
-            <h2>Results</h2>
+            <h3>Search Results</h3>
           </div>
             <div class="row">
-              <div class="center col-md-6 col-md-offset-1">
+              <div class="center col-md-11 col-md-offset-1">
                 <h2>Search</h2>
-                <form class="search" action="index.html" method="post" id="searchForm">
-                  Author name: <input type="text" name="author" id="author"><br>
-                  <!-- Greater than <input type="radio" name="greater" value="greaterthan" id="greater">
-                  or less than <input type="radio" name="less" value="lessthan" id="less"> -->
-                  <input type="number" name="numPages" id="pages"> number of pages.<br>
-                  Published on <input type="text" name="pubDate" id="date"><br>
-                  <input type="button" onclick="submitSearchData()" value="Submit">
-                </form>
-              </div>
-              <div class="right col-md-4">
-                <h2>Random</h2>
-                <p>Don't know what to read? Pull a random book or random author.</p>
+                <p>Find books using one or more of the following parameters.</p>
               </div>
             </div>
+            <div class="row">
+              <form class="form-horizontal">
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="srch-title">Title:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="srch-title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="srch-author">Author:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="srch-author">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="srch-pages"># of pages:</label>
+                  <div class="col-sm-1">
+                    <input type="button" name="" value="">
+                  </div>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="srch-pages">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-3" for="srch-pubdate">Publication date:</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="srch-pubdate">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="row">
+              <button type="submit" class="btn btn-lg col-sm-7 col-sm-offset-3" id="search-submit">Submit</button>
+            </div>
+
+                <!-- <form class="search" action="index.html" method="post" id="searchForm">
+                  Author: <input type="text" name="search-author" id="author"><br>
+                  Title: <input type="text" name="search-title" id="author"><br> -->
+                  <!-- Greater than <input type="radio" name="greater" value="greaterthan" id="greater">
+                  or less than <input type="radio" name="less" value="lessthan" id="less"> -->
+                  <!-- Length (pages):<input type="number" name="search-numPages" id="pages"><br>
+                  When published: <input type="text" name="search-pubDate" id="date"><br>
+                  <input type="button" onclick="submitSearchData()" value="Submit">
+                </form> -->
+              <!-- </div> -->
+              <!-- <div class="right col-md-4">
+                <h2>Random</h2>
+                <p>Don't know what to read? Pull a <a href="javascript:void(0)">random book</a> or <a href="javascript:void(0)">random author</a> from the library.</p>
+              </div> -->
+            <!-- </div> -->
         </div>
       </div>
       <div class="row lower">
         <div class="well col-md-6 left">
-          <h2>Manage My Library</h2>
-          <input type="submit" class="btn btn-primary btn-md addbook" value="Add Book">
-          <input type="submit" class="btn btn-success btn-md addbooks" value="Add Books">
-          <input type="submit" class="btn btn-warning btn-md removetitle" value="Remove Title">
-          <input type="submit" class="btn btn-danger btn-md removeauthor" value="Remove Author">
-          <form class="manage" action="index.html" method="post">
-              <input type="text" name="title" placeholder="title">
-              <input type="text" name="author" placeholder="author">
-              <input type="text" name="pages" placeholder="# of pages">
-              <input type="text" name="date" placeholder="publication date">
-          </form>
+          <div class="manage-buttons">
+            <div class="title">
+              <h2>Manage My Library</h2>
+            </div>
+            <input type="submit" class="btn btn-danger btn-md removeauthor" value="Remove Author">
+            <input type="submit" class="btn btn-warning btn-md removetitle" value="Remove Title">
+            <input type="submit" class="btn btn-success btn-md addbooks" value="Add Books">
+            <input type="submit" class="btn btn-primary btn-md addbook" value="Add Book">
+          </div>
+          <div class="manage">
+            <form class="form-inline" action="index.html" method="post">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+            </form>
+          </div>
         </div>
       </div>
 

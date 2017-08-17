@@ -3,6 +3,11 @@ body {
   background-color: DarkGray;
 }
 
+p {
+  font-family: Georgia, serif;
+  font-size: 1.5em;
+}
+
 header {
   background-image: url("../images/dmitrij-paskevic-44124-sm.jpg");
   height: 200px;
@@ -28,17 +33,33 @@ header .title {
   min-height: 200px;
   background-color: black;
   color: white;
+  border: none;
 }
 
 .lower .well {
   margin: 0;
+  padding: 2%;
 }
 
 .lower .left {
   margin-left: 2%;
 }
 
-form .manage {
-  margin-top: 5%;
-  padding-top: 20px;
+.manage-buttons .title {
+  display: inline-block;
+}
+
+.manage-buttons .btn {
+  float: right;
+  margin: 10px 15px 0 0;
+}
+
+.manage {
+  padding-top: 5%;
+}
+
+.manage input {
+  width: 24%;
+  height: 40px;
+  text-align: center;
 }

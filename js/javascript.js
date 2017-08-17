@@ -1,5 +1,6 @@
 var Library = function() {};
 
+
 Library.prototype.myBookArr = [];
 
 Library.prototype.addBook = function(book) {
@@ -123,8 +124,8 @@ window.bookNine = new Book({title: "The Quiet American", author: "Graham Greene"
 window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
 
 
-Library.prototype.populateStorage = function(key, libArray) {
-    localStorage.setItem(key, JSON.stringify(libArray));
+Library.prototype.populateStorage = function(key) {
+    localStorage.setItem(key, JSON.stringify(this.myBookArr));
   };
 
 //document ready function
@@ -141,7 +142,7 @@ Library.prototype.init = function() {
 };
 
 Library.prototype._bindEvents = function() {
-  $("addbook").on("click", $.proxy(this.newFunction, this));
+  $(".btn .addbook").on("click", $.proxy(this._handleAddBook(), this));
   $("addlist").on("click", $.proxy(this.newFunction, this));
   $("removetitle").on("click", $.proxy(this.newFunction, this));
   $("removeauthor").on("click", $.proxy(this.newFunction, this));
@@ -149,7 +150,8 @@ Library.prototype._bindEvents = function() {
 
 Library.prototype._checkLocalStorage = function() {
   if(localStorage) {
-    var vLibrary = JSON.parse(localStorage.getItem("vLibrary"));
+    var vLibrary = JSON.parse(localStorage.getItem("vLibrary")) || new Array();
+    this.myBookArr = vLibrary;
     this._populateCatalog(vLibrary);
   };
 };
@@ -167,11 +169,16 @@ Library.prototype._populateCatalog = function(library) {
     newRow.append(newPages);
     newRow.append(newPubDate);
     $table.append(newRow);
-
   };
 };
 
-Library.prototype._handleGetMyName = function() {
-  var inputVal = $("input.my-name").val();
-  alert(val);
+Library.prototype._handleAddBook = function() {
+  var newBook = {
+    title: $("#add-title").val(),
+    author: $("#add-author").val(),
+    numPages: $("#add-pages").val(),
+    pubDate: $("#add-date").val(),
+  };
+  console.log(newBook);
+  this.myBookArr.push(newBook);
 };
