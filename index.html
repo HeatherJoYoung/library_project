@@ -13,7 +13,7 @@
       </header>
       <div class="row">
         <div class="jumbotron col-md-6">
-          <h2>My Catalog</h2>
+          <h2>Catalog</h2>
           <div class=".table-responsive">
             <table class="table table-hover library-table">
               <tr>
@@ -55,24 +55,24 @@
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="srch-pages">Length:</label>
-                  <div class="col-sm-2">
+                  <!-- <div class="col-sm-2">
                     <label>Less than <input type="radio" id="less" value=""></label>
                   </div>
                   <div class="col-sm-2">
                     <label>Greater than <input type="radio" id="greater" value=""></label>
-                  </div>
+                  </div> -->
                   <div class="col-sm-4">
                     <input type="text" class="form-control" id="srch-pages" placeholder="number of pages">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-3" for="srch-pubdate">Published:</label>
-                  <div class="col-sm-2">
+                  <!-- <div class="col-sm-2">
                     <label>Before <input type="radio" id="before" value=""></label>
                   </div>
                   <div class="col-sm-2">
                     <label>After <input type="radio" id="after" value=""></label>
-                  </div>
+                  </div> -->
                   <div class="col-sm-4">
                     <input type="text" class="form-control" id="srch-pubdate" placeholder="date">
                   </div>
@@ -82,22 +82,9 @@
             <div class="row">
               <button type="submit" class="btn btn-lg col-sm-7 col-sm-offset-3" id="search-submit">Submit</button>
             </div>
+            <div class="row">
 
-                <!-- <form class="search" action="index.html" method="post" id="searchForm">
-                  Author: <input type="text" name="search-author" id="author"><br>
-                  Title: <input type="text" name="search-title" id="author"><br> -->
-                  <!-- Greater than <input type="radio" name="greater" value="greaterthan" id="greater">
-                  or less than <input type="radio" name="less" value="lessthan" id="less"> -->
-                  <!-- Length (pages):<input type="number" name="search-numPages" id="pages"><br>
-                  When published: <input type="text" name="search-pubDate" id="date"><br>
-                  <input type="button" onclick="submitSearchData()" value="Submit">
-                </form> -->
-              <!-- </div> -->
-              <!-- <div class="right col-md-4">
-                <h2>Random</h2>
-                <p>Don't know what to read? Pull a <a href="javascript:void(0)">random book</a> or <a href="javascript:void(0)">random author</a> from the library.</p>
-              </div> -->
-            <!-- </div> -->
+            </div>
         </div>
       </div>
       <div class="row lower">
@@ -106,26 +93,69 @@
             <div class="title">
               <h2>Manage My Library</h2>
             </div>
-            <input type="submit" class="btn btn-danger btn-md removeauthor" value="Remove Author">
-            <input type="submit" class="btn btn-warning btn-md removetitle" value="Remove Title">
-            <input type="submit" class="btn btn-success btn-md addbooks" value="Add Books">
-            <input type="submit" class="btn btn-primary btn-md addbook" value="Add Book">
+            <input type="submit" class="btn btn-danger btn-md author-btn" value="Remove Author">
+            <input type="submit" class="btn btn-warning btn-md title-btn" value="Remove Title">
+            <input type="submit" class="btn btn-success btn-md addbooks-btn" value="Add Books">
+            <input type="submit" class="btn btn-primary btn-md addbook-btn" value="Add Book">
           </div>
           <div class="manage">
-            <form class="form-inline" action="index.html" method="post">
+            <form class="form-inline" id="book-form" action="index.html" method="post">
               <input type="text" class="form-control" id="add-title" placeholder="title">
               <input type="text" class="form-control" id="add-author" placeholder="author">
               <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
               <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="submit" class="btn btn-basic btn-sm addbook-submit" value="Submit">
+            </form>
+            <form class="form-inline" id="multi-book-form" action="index.html" method="post">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="text" class="form-control" id="add-title" placeholder="title">
+              <input type="text" class="form-control" id="add-author" placeholder="author">
+              <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
+              <input type="text" class="form-control" id="add-date" placeholder="publication date">
+              <input type="submit" class="btn btn-basic btn-sm addbooks-submit" value="Submit">
+            </form>
+            <form class="form-inline" id="remove-title" action="index.html" method="post">
+              <input type="text" class="form-control remove-title" placeholder="title">
+              <input type="submit" class="btn btn-basic btn-sm title-submit" value="Submit">
+            </form>
+            <form class="form-inline" id="remove-author" action="index.html" method="post">
+              <input type="text" class="form-control remove-author" placeholder="author">
+              <input type="submit" class="btn btn-basic btn-sm author-submit" value="Submit">
             </form>
           </div>
         </div>
-      </div>
+        <div class="col-md-5">
+          <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+              <h2>Randomness</h2>
+              <p>Don't know what to read? Pull a random <a href="javascript:void(0)" class="random-author">author</a> or <a href="javascript:void(0)" class="random-title">book title</a>.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+              <h2>List of Authors</h2>
+              <p>Pull a <a href="javascript:void(0)" class="author-list">list of authors</a> from our catalog.</p>
+            </div>
+          </div>
+        </div>
 
-    <!-- <script src="js/filtersearch_plus.js"></script> -->
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="js/javascript.js"></script>
-    <!-- <script src="js/filtersearch.js"></script> -->
   </container>
   </body>
 </html>

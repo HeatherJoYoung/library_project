@@ -22,6 +22,12 @@ header .title {
   padding: 0;
 }
 
+.btn-basic {
+  color: black;
+  font-size: 1em;
+  font-weight: bold;
+}
+
 .jumbotron {
   margin: 2%;
   background-color: Gainsboro;
@@ -36,8 +42,17 @@ header .title {
   border: none;
 }
 
+.results {
+  font-size: 1.2em;
+  font-family: Courier;
+}
+
+.results h3 {
+  color: darkGray;
+}
+
 .lower .well {
-  margin: 0;
+  margin: 2%;
   padding: 2%;
 }
 
@@ -56,6 +71,20 @@ header .title {
 
 .manage {
   padding-top: 5%;
+}
+
+.block {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  padding: 10px;
+  margin: 5px;
+  background-color: white;
+  color: black;
+}
+
+#book-form, #multi-book-form, #remove-author, #remove-title  {
+  display: none;
 }
 
 .manage input {
