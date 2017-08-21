@@ -138,10 +138,15 @@ Library.prototype.getAuthors = function() {
 };
 
 Library.prototype._handleAuthorList = function() {
+  var $table = $(".results-table");
+  $table.empty();
   var results = this.getAuthors();
-  var $results = $(".results")
-  var newP = $("<p>").text(results);
-  $results.append(newP);
+  for(i = 0; i < results.length; i++) {
+    var newRow = $("<tr>");
+    var newAuthor = $("<td>").text(results[i]);
+    newRow.append(newAuthor);
+    $table.append(newRow);
+  };
 };
 
 
