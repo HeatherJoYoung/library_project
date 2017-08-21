@@ -8,6 +8,10 @@ p {
   font-size: 1.5em;
 }
 
+ul {
+  list-style-type: none;
+}
+
 header {
   background-image: url("../images/dmitrij-paskevic-44124-sm.jpg");
   height: 200px;
