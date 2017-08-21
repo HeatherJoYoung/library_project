@@ -35,9 +35,7 @@ Library.prototype.addBook = function(book) {
 };
 
 Library.prototype.addBooks = function(booksArray) {
-  console.log("I got this far.");
   var num = 0;
-  console.log(booksArray);
   for (i = 0; i < booksArray.length; i++) {
     if(this.addBook(booksArray[i])) {
         num++;
@@ -136,7 +134,6 @@ Library.prototype.getAuthors = function() {
   {
     for (j = 0; j < authorArray.length; j++) {
       if (this.myBookArr[i].author === authorArray[j]) {
-        console.log(this.myBookArr[i].author);
         break dance;
       }
     }
@@ -163,13 +160,12 @@ Library.prototype.populateStorage = function(key) {
 
 Library.prototype._populateCatalog = function(library) {
   var $table = $(".library-table");
-  $table.empty();
   for(i = 0; i < library.length; i++) {
     var newRow = $("<tr>");
     var newTitle = $("<td>").text(library[i].title);
     var newAuthor = $("<td>").text(library[i].author);
     var newPages = $("<td>").text(library[i].numPages);
-    var newPubDate = $("<td>").text(library[i].pubDate);
+    var newPubDate = $("<td>").text(library[i].pubDate.toGMTString().slice(4, 16));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -313,7 +309,7 @@ Library.prototype._compare = function(obj) {
     this._populateSearchResults(results);
   }
   else {
-    console.log("No matches found.");
+    alert("No matches found.");
   }
 }
 
@@ -325,7 +321,7 @@ Library.prototype._populateSearchResults = function(results) {
     var newTitle = $("<td>").text(results[i].title);
     var newAuthor = $("<td>").text(results[i].author);
     var newPages = $("<td>").text(results[i].numPages);
-    var newPubDate = $("<td>").text(results[i].pubDate);
+    var newPubDate = $("<td>").text(results[i].pubDate.toUTCString().slice(4, 15));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -375,6 +371,7 @@ Library.prototype._toggleRemoveAuthor = function () {
 
 Library.prototype._checkLocalStorage = function() {
   var library = [];
+  this.myBookArr = new Array();
   if(localStorage.length) {
     library = JSON.parse(localStorage.getItem("vLibrary"));
     this.myBookArr = library;
