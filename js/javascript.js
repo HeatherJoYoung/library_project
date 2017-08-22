@@ -10,6 +10,7 @@ var Book = function(oArgs){
 
 var titleResults = null;
 var authorResults = null;
+var pageMatch = null;
 
 Library.prototype.myBookArr = [];
 
@@ -42,7 +43,6 @@ Library.prototype._bindEvents = function() {
 Library.prototype._checkLocalStorage = function() {
   var library = [];
   this.myBookArr = new Array();
-  console.log(localStorage);
   if(localStorage.length > 0) {
     library = JSON.parse(localStorage.getItem("vLibrary"));
     this.myBookArr = library;
@@ -79,19 +79,19 @@ Library.prototype.populateStorage = function(key) {
 
 Library.prototype._submitSearchData = function() {
 
-  // function pageOperatorFunction() {
-	// 	if(document.getElementById("less").checked) {
-	// 			return ("lessthan");
-	// 		}
-	// 		else if (document.getElementById("greater").checked) {
-	// 			return ("greaterthan");
-	// 		}
-	// 		else {
-	// 			return ("equals");
-	// 		}
-	// 	};
-  // var pageOperator = pageOperatorFunction();
-  //
+  function pageOperatorFunction() {
+		if(document.getElementById("less").checked) {
+				return ("lessthan");
+			}
+			else if (document.getElementById("greater").checked) {
+				return ("greaterthan");
+			}
+			else {
+				return ("equals");
+			}
+		};
+  var pageOperator = pageOperatorFunction();
+
   // function dateOperatorFunction() {
 	// 	if(document.getElementById("before").checked) {
 	// 			return ("lessthan");
@@ -104,12 +104,13 @@ Library.prototype._submitSearchData = function() {
 	// 		}
 	// 	};
   // var dateOperator = dateOperatorFunction();
+
   var searchBook = {
     title: $("#srch-title").val(),
     author: $("#srch-author").val(),
-    // pageOp: pageOperator,
+    pageOp: pageOperator,
     pages: $("#srch-pages").val(),
-    // dateOp: dateOperator,
+    //dateOp: dateOperator,
     date: $("#srch-pubdate").val()
   };
 
@@ -120,16 +121,21 @@ Library.prototype._compare = function(obj) {
   var title = false;
   var author = false;
   var pages = false;
-  var date = false;
+  //var date = false;
   var array = this.myBookArr;
   var results = [];
 
   for (i = 0; i < array.length; i++) {
+
     if (array[i].title.toLowerCase().indexOf(obj.title.toLowerCase()) > -1) {
       titleResults = true;
     }
     if (array[i].author.toLowerCase().indexOf(obj.author.toLowerCase()) > -1) {
       authorResults = true;
+    }
+
+    if ((obj.pageOp == "greaterthan" && array[i].numPages > obj.pages) || (obj.pageOp == "lessthan" && array[i].numPages < obj.pages)) {
+      pageMatch = true;
     }
 
     if (!obj.title || titleResults) {
@@ -138,7 +144,7 @@ Library.prototype._compare = function(obj) {
     if (!obj.author || authorResults) {
       author = true;
     }
-    if (!obj.pages || obj.pages == array[i].numPages) {
+    if (!obj.pages || pageMatch) {
       pages = true;
     }
     if (!obj.date || obj.date == array[i].pubDate) {
@@ -151,8 +157,9 @@ Library.prototype._compare = function(obj) {
     title = false;
     author = false;
     pages = false;
-    date = false;
-    titleResults = false;;
+    //date = false;
+    pageMatch = false;
+    titleResults = false;
     authorResults = false;
   }
 
