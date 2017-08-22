@@ -93,10 +93,10 @@
             <div class="title">
               <h2>Manage My Library</h2>
             </div>
-            <input type="submit" class="btn btn-danger btn-md author-btn" value="Remove Author">
-            <input type="submit" class="btn btn-warning btn-md title-btn" value="Remove Title">
-            <input type="submit" class="btn btn-success btn-md addbooks-btn" value="Add Books">
-            <input type="submit" class="btn btn-primary btn-md addbook-btn" value="Add Book">
+            <button type="button" class="btn btn-danger btn-md author-btn">Remove Author</button>
+            <button type="button" class="btn btn-warning btn-md title-btn">Remove Title</button>
+            <button type="button" class="btn btn-success btn-md addbooks-btn">Add Books</button>
+            <button type="button" class="btn btn-primary btn-md addbook-btn">Add Book</button>
           </div>
           <div class="manage">
             <form class="form-inline" id="book-form" action="index.html" method="post">
@@ -104,7 +104,7 @@
               <input type="text" class="form-control" id="add-author" placeholder="author">
               <input type="text" class="form-control" id="add-pages" placeholder="# of pages">
               <input type="text" class="form-control" id="add-date" placeholder="publication date">
-              <input type="submit" class="btn btn-basic btn-sm addbook-submit" value="Submit">
+              <button type="button" class="btn btn-basic btn-sm addbook-submit">Submit</button>
             </form>
             <ul id="multi-book-form">
               <li>
@@ -148,16 +148,16 @@
                 </form>
               </li>
               <li>
-                <input type="submit" class="btn btn-basic btn-sm addbooks-submit" value="Submit">
+                <button type="button" class="btn btn-basic btn-sm addbooks-submit">Submit</button>
               </li>
             </ul>
             <form class="form-inline" id="remove-title" action="index.html" method="post">
               <input type="text" class="form-control remove-title" placeholder="title">
-              <input type="submit" class="btn btn-basic btn-sm title-submit" value="Submit">
+              <button type="button" class="btn btn-basic btn-sm title-submit">Submit</button>
             </form>
             <form class="form-inline" id="remove-author" action="index.html" method="post">
               <input type="text" class="form-control remove-author" placeholder="author">
-              <input type="submit" class="btn btn-basic btn-sm author-submit" value="Submit">
+              <button type="button" class="btn btn-basic btn-sm author-submit">Submit</button>
             </form>
           </div>
         </div>

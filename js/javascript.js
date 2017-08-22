@@ -57,12 +57,13 @@ Library.prototype._checkLocalStorage = function() {
 
 Library.prototype._populateCatalog = function(library) {
   var $table = $(".library-table");
+//  var date = library.newPubDate.slice(0, 4);
   for(i = 0; i < library.length; i++) {
     var newRow = $("<tr>");
     var newTitle = $("<td>").text(library[i].title);
     var newAuthor = $("<td>").text(library[i].author);
     var newPages = $("<td>").text(library[i].numPages);
-    var newPubDate = $("<td>").text(library[i].pubDate); //.toUTCString().slice(4, 16));
+    var newPubDate = $("<td>").text(library[i].pubDate.slice(0, 4));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -348,7 +349,7 @@ Library.prototype._handleRemoveTitle = function() {
 
 Library.prototype.removeBookByAuthor = function(author) {
   var booksRemoved = [];
-  for (i = 0; i < this.myBookArr.length; i++) {
+  for (i = 0; 1 < this.myBookArr.length; i++) {
     if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) > -1 && author) {
       booksRemoved.push(this.myBookArr[i]);
       this.myBookArr.splice(i, 1);
