@@ -41,23 +41,17 @@ Library.prototype._bindEvents = function() {
 };
 
 Library.prototype._checkLocalStorage = function() {
-  var library = [];
-  this.myBookArr = new Array();
-  if(localStorage.length > 0) {
-    library = JSON.parse(localStorage.getItem("vLibrary"));
-    this.myBookArr = library;
-    this._populateCatalog(this.myBookArr);
-  }
-  else {
+  this.myBookArr = JSON.parse(localStorage.getItem("vLibrary"));
+  if (this.myBookArr == null) {
+    this.myBookArr = new Array ();
     this.addBooks([bookOne, bookTwo, bookThree, bookFour, bookFive, bookSix, bookSeven, bookEight, bookNine, bookTen]);
-    this._populateCatalog(this.myBookArr);
     this.populateStorage("vLibrary");
-  };
+  }
+  this._populateCatalog(this.myBookArr);
 };
 
 Library.prototype._populateCatalog = function(library) {
   var $table = $(".library-table");
-//  var date = library.newPubDate.slice(0, 4);
   for(i = 0; i < library.length; i++) {
     var newRow = $("<tr>");
     var newTitle = $("<td>").text(library[i].title);
@@ -122,7 +116,7 @@ Library.prototype._compare = function(obj) {
   var title = false;
   var author = false;
   var pages = false;
-  //var date = false;
+  var date = false;
   var array = this.myBookArr;
   var results = [];
 
@@ -158,7 +152,7 @@ Library.prototype._compare = function(obj) {
     title = false;
     author = false;
     pages = false;
-    //date = false;
+    date = false;
     pageMatch = false;
     titleResults = false;
     authorResults = false;
@@ -180,7 +174,7 @@ Library.prototype._populateSearchResults = function(results) {
     var newTitle = $("<td>").text(results[i].title);
     var newAuthor = $("<td>").text(results[i].author);
     var newPages = $("<td>").text(results[i].numPages);
-    var newPubDate = $("<td>").text(results[i].pubDate); //.toUTCString().slice(4, 15));
+    var newPubDate = $("<td>").text(results[i].pubDate.slice(0, 4));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -303,7 +297,8 @@ Library.prototype._handleAddBook = function() {
   if(newBook.title) {
     this.addBook(newBook);
     this.populateStorage("vLibrary");
-    this._checkLocalStorage();
+    //this._populateCatalog(this.myBookArr);
+    //this._checkLocalStorage();
   } else {
     alert("Title field must be filled out.");
   }
@@ -324,7 +319,7 @@ Library.prototype._handleAddBooks = function () {
   });
   this.addBooks(books);
   this.populateStorage("vLibrary");
-  this._checkLocalStorage();
+  //this._checkLocalStorage();
   $("#multi-book-form").toggle();
 };
 
@@ -341,7 +336,7 @@ Library.prototype.removeBookByTitle = function(title) {
 };
 
 Library.prototype._handleRemoveTitle = function() {
-  var title = $(".remove-title").val();
+  var title = $(".remove-title-input").val();
   this.removeBookByTitle(title);
   this.populateStorage("vLibrary");
   this._checkLocalStorage();
@@ -350,7 +345,9 @@ Library.prototype._handleRemoveTitle = function() {
 Library.prototype.removeBookByAuthor = function(author) {
   var booksRemoved = [];
   for (i = 0; 1 < this.myBookArr.length; i++) {
-    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) > -1 && author) {
+    console.log (author);
+    console.log(this.myBookArr[i].author);
+    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) > -1) {
       booksRemoved.push(this.myBookArr[i]);
       this.myBookArr.splice(i, 1);
     }
@@ -366,14 +363,14 @@ Library.prototype.removeBookByAuthor = function(author) {
 };
 
 Library.prototype._handleRemoveAuthor = function() {
-  var author = $(".remove-author").val();
+  var author = $(".remove-author-input").val();
   this.removeBookByAuthor(author);
   this.populateStorage("vLibrary");
   this._checkLocalStorage();
 };
 
 Library.prototype.init = function() {
-// set up bind events
+
   this._bindEvents();
   this._checkLocalStorage();
   //you can also set commonly used selectors in the init function (i.e., this.$container = (#Container))
