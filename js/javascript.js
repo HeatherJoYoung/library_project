@@ -52,6 +52,7 @@ Library.prototype._checkLocalStorage = function() {
 
 Library.prototype._populateCatalog = function(library) {
   var $table = $(".library-table");
+  $table.empty();
   for(i = 0; i < library.length; i++) {
     var newRow = $("<tr>");
     var newTitle = $("<td>").text(library[i].title);
@@ -297,11 +298,11 @@ Library.prototype._handleAddBook = function() {
   if(newBook.title) {
     this.addBook(newBook);
     this.populateStorage("vLibrary");
-    //this._populateCatalog(this.myBookArr);
-    //this._checkLocalStorage();
+    this._checkLocalStorage();
   } else {
     alert("Title field must be filled out.");
   }
+  $("#book-form").toggle();
 };
 
 Library.prototype._handleAddBooks = function () {
@@ -319,7 +320,7 @@ Library.prototype._handleAddBooks = function () {
   });
   this.addBooks(books);
   this.populateStorage("vLibrary");
-  //this._checkLocalStorage();
+  this._checkLocalStorage();
   $("#multi-book-form").toggle();
 };
 
@@ -329,6 +330,7 @@ Library.prototype.removeBookByTitle = function(title) {
       this.myBookArr.splice(i, 1);
       alert(title + " was removed from the library.");
       return true;
+      $("#remove-title").toggle();
     }
   }
   alert("There are no books in the library with this title.");
@@ -343,17 +345,19 @@ Library.prototype._handleRemoveTitle = function() {
 };
 
 Library.prototype.removeBookByAuthor = function(author) {
-  var booksRemoved = [];
+  var keepBooks = [];
+  var authorMatch = true;
+
   for (i = 0; 1 < this.myBookArr.length; i++) {
-    console.log (author);
-    console.log(this.myBookArr[i].author);
-    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) > -1) {
-      booksRemoved.push(this.myBookArr[i]);
-      this.myBookArr.splice(i, 1);
+    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) == -1) {
+      authorMatch = false;
+    }
+    if (authorMatch) {
+      keepBooks.push(this.myBookArr[i]);
     }
   }
-  if (booksRemoved.length > 0) {
-    alert(booksRemoved.length + " book(s) by " + author + " removed from the library.");
+  if (keepBooks.length < this.myBookArr.length) {
+    alert(this.myBookArr.length - keepBooks.length + " book(s) by " + author + " removed from the library.");
     return true;
   }
   else {
