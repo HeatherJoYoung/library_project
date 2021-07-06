@@ -58,7 +58,7 @@ Library.prototype._populateCatalog = function(library) {
     var newTitle = $("<td>").text(library[i].title);
     var newAuthor = $("<td>").text(library[i].author);
     var newPages = $("<td>").text(library[i].numPages);
-    var newPubDate = $("<td>").text(library[i].pubDate.slice(0, 4));
+    var newPubDate = $("<td>").text(library[i].pubDate.substring(0, 4));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -346,18 +346,16 @@ Library.prototype._handleRemoveTitle = function() {
 
 Library.prototype.removeBookByAuthor = function(author) {
   var keepBooks = [];
-  var authorMatch = true;
-
-  for (i = 0; 1 < this.myBookArr.length; i++) {
-    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) == -1) {
-      authorMatch = false;
-    }
-    if (authorMatch) {
-      keepBooks.push(this.myBookArr[i]);
+ 
+  for (i = 0; i < this.myBookArr.length; i++) {
+    const book = this.myBookArr[i];
+    if (book.author.toLowerCase() !== author.toLowerCase()) {
+      keepBooks.push(book);
     }
   }
   if (keepBooks.length < this.myBookArr.length) {
     alert(this.myBookArr.length - keepBooks.length + " book(s) by " + author + " removed from the library.");
+    this.myBookArr = keepBooks;
     return true;
   }
   else {
@@ -369,8 +367,8 @@ Library.prototype.removeBookByAuthor = function(author) {
 Library.prototype._handleRemoveAuthor = function() {
   var author = $(".remove-author-input").val();
   this.removeBookByAuthor(author);
+  this._populateCatalog(this.myBookArr);
   this.populateStorage("vLibrary");
-  this._checkLocalStorage();
 };
 
 Library.prototype.init = function() {
