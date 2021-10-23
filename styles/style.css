@@ -16,14 +16,12 @@ header {
   background-image: url("../images/dmitrij-paskevic-44124-sm.jpg");
   height: 200px;
   padding: 30px;
-  margin: 0 0 20px 0;
 }
 
-header .title {
+header h1 {
   color: white;
   font-size: 5em;
   font-family: Georgia, serif;
-  padding: 0;
 }
 
 .btn-basic {
@@ -32,16 +30,26 @@ header .title {
   font-weight: bold;
 }
 
-.jumbotron {
-  margin: 2%;
+.col {
+  padding: 0 24px;
+}
+
+.container-fluid {
+  padding: 24px;
+}
+
+.catalog, .manage {
   background-color: Gainsboro;
+  border-radius: 8px;
+  margin-bottom: 40px;
   min-height: 200px;
+  padding:  20px;
 }
 
 .well {
-  margin: 5%;
-  min-height: 200px;
+  min-height: 300px;
   background-color: black;
+  border-radius: 8px;
   color: white;
   border: none;
 }
@@ -73,10 +81,6 @@ header .title {
   margin: 10px 15px 0 0;
 }
 
-.manage {
-  padding-top: 5%;
-}
-
 .block {
   display: inline-block;
   height: 200px;
@@ -87,11 +91,11 @@ header .title {
   color: black;
 }
 
-#book-form, #multi-book-form, #remove-author, #remove-title  {
+/* #book-form, #multi-book-form, #remove-author, #remove-title  {
   display: none;
-}
+} */
 
-.manage input {
+.editing input {
   width: 24%;
   height: 40px;
   text-align: center;

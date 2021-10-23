@@ -27,10 +27,10 @@ window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg",
 
 Library.prototype._bindEvents = function() {
   $("#search-submit").on("click", $.proxy(this._submitSearchData, this));
-  $(".addbook-btn").on("click", $.proxy(this._toggleAddBook, this));
-  $(".addbooks-btn").on("click", $.proxy(this._toggleAddBooks, this));
-  $(".title-btn").on("click", $.proxy(this._toggleRemoveTitle, this));
-  $(".author-btn").on("click", $.proxy(this._toggleRemoveAuthor, this));
+  $("#add-book-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#add-books-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#remove-title-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#remove-author-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
   $(".addbook-submit").on("click", $.proxy(this._handleAddBook, this));
   $(".addbooks-submit").on("click", $.proxy(this._handleAddBooks, this));
   $(".title-submit").on("click", $.proxy(this._handleRemoveTitle, this));
@@ -244,29 +244,46 @@ Library.prototype._handleAuthorList = function() {
 
 //***************  MANAGE LIBRARY FUNCTIONS  *****************************
 
-Library.prototype._toggleAddBook = function () {
-  $(".addbook-btn").click(function() {
-    $("#book-form").toggle();
-  });
-  }
+const tabIds = ['add-book-tab', 'add-books-tab', 'remove-title-tab', 'remove-author-tab']
 
-Library.prototype._toggleAddBooks = function () {
-  $(".addbooks-btn").click(function() {
-    $("#multi-book-form").toggle();
-  });
-  }
+Library.prototype._toggleManageLibraryTabs = function (e) {
+  const buttonClicked = e.currentTarget.id;
+  tabIds.forEach(id => {
+    const tabSelector = `#${id}`;
+    const panelSelector = tabSelector.substring(0, tabSelector.length - 4)
+    if (id === buttonClicked) {
+      $(tabSelector).addClass('active');
+      $(panelSelector).addClass('active');
+    } else {
+      $(tabSelector).removeClass('active');
+      $(panelSelector).removeClass('active');
+    }
+  })
+}
 
-Library.prototype._toggleRemoveTitle = function () {
-  $(".title-btn").click(function() {
-    $("#remove-title").toggle();
-  });
-  }
+// Library.prototype._toggleAddBook = function () {
+//   $(".addbook-btn").click(function() {
+//     $("#book-form").toggle();
+//   });
+// }
 
-Library.prototype._toggleRemoveAuthor = function () {
-  $(".author-btn").click(function() {
-    $("#remove-author").toggle();
-  });
-  }
+// Library.prototype._toggleAddBooks = function () {
+//   $(".addbooks-btn").click(function() {
+//     $("#multi-book-form").toggle();
+//   });
+//   }
+
+// Library.prototype._toggleRemoveTitle = function () {
+//   $(".title-btn").click(function() {
+//     $("#remove-title").toggle();
+//   });
+//   }
+
+// Library.prototype._toggleRemoveAuthor = function () {
+//   $(".author-btn").click(function() {
+//     $("#remove-author").toggle();
+//   });
+//   }
 
 Library.prototype.addBook = function(book) {
 
