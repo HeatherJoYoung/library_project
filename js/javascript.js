@@ -27,10 +27,10 @@ window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg",
 
 Library.prototype._bindEvents = function() {
   $("#search-submit").on("click", $.proxy(this._submitSearchData, this));
-  $(".addbook-btn").on("click", $.proxy(this._toggleAddBook, this));
-  $(".addbooks-btn").on("click", $.proxy(this._toggleAddBooks, this));
-  $(".title-btn").on("click", $.proxy(this._toggleRemoveTitle, this));
-  $(".author-btn").on("click", $.proxy(this._toggleRemoveAuthor, this));
+  $("#add-book-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#add-books-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#remove-title-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
+  $("#remove-author-tab").on("click", $.proxy(this._toggleManageLibraryTabs, this));
   $(".addbook-submit").on("click", $.proxy(this._handleAddBook, this));
   $(".addbooks-submit").on("click", $.proxy(this._handleAddBooks, this));
   $(".title-submit").on("click", $.proxy(this._handleRemoveTitle, this));
@@ -58,7 +58,7 @@ Library.prototype._populateCatalog = function(library) {
     var newTitle = $("<td>").text(library[i].title);
     var newAuthor = $("<td>").text(library[i].author);
     var newPages = $("<td>").text(library[i].numPages);
-    var newPubDate = $("<td>").text(library[i].pubDate.slice(0, 4));
+    var newPubDate = $("<td>").text(library[i].pubDate.substring(0, 4));
     newRow.append(newTitle);
     newRow.append(newAuthor);
     newRow.append(newPages);
@@ -244,29 +244,46 @@ Library.prototype._handleAuthorList = function() {
 
 //***************  MANAGE LIBRARY FUNCTIONS  *****************************
 
-Library.prototype._toggleAddBook = function () {
-  $(".addbook-btn").click(function() {
-    $("#book-form").toggle();
-  });
-  }
+const tabIds = ['add-book-tab', 'add-books-tab', 'remove-title-tab', 'remove-author-tab']
 
-Library.prototype._toggleAddBooks = function () {
-  $(".addbooks-btn").click(function() {
-    $("#multi-book-form").toggle();
-  });
-  }
+Library.prototype._toggleManageLibraryTabs = function (e) {
+  const buttonClicked = e.currentTarget.id;
+  tabIds.forEach(id => {
+    const tabSelector = `#${id}`;
+    const panelSelector = tabSelector.substring(0, tabSelector.length - 4)
+    if (id === buttonClicked) {
+      $(tabSelector).addClass('active');
+      $(panelSelector).addClass('active');
+    } else {
+      $(tabSelector).removeClass('active');
+      $(panelSelector).removeClass('active');
+    }
+  })
+}
 
-Library.prototype._toggleRemoveTitle = function () {
-  $(".title-btn").click(function() {
-    $("#remove-title").toggle();
-  });
-  }
+// Library.prototype._toggleAddBook = function () {
+//   $(".addbook-btn").click(function() {
+//     $("#book-form").toggle();
+//   });
+// }
 
-Library.prototype._toggleRemoveAuthor = function () {
-  $(".author-btn").click(function() {
-    $("#remove-author").toggle();
-  });
-  }
+// Library.prototype._toggleAddBooks = function () {
+//   $(".addbooks-btn").click(function() {
+//     $("#multi-book-form").toggle();
+//   });
+//   }
+
+// Library.prototype._toggleRemoveTitle = function () {
+//   $(".title-btn").click(function() {
+//     $("#remove-title").toggle();
+//   });
+//   }
+
+// Library.prototype._toggleRemoveAuthor = function () {
+//   $(".author-btn").click(function() {
+//     $("#remove-author").toggle();
+//   });
+//   }
 
 Library.prototype.addBook = function(book) {
 
@@ -346,18 +363,16 @@ Library.prototype._handleRemoveTitle = function() {
 
 Library.prototype.removeBookByAuthor = function(author) {
   var keepBooks = [];
-  var authorMatch = true;
-
-  for (i = 0; 1 < this.myBookArr.length; i++) {
-    if (this.myBookArr[i].author.toLowerCase().indexOf(author.toLowerCase()) == -1) {
-      authorMatch = false;
-    }
-    if (authorMatch) {
-      keepBooks.push(this.myBookArr[i]);
+ 
+  for (i = 0; i < this.myBookArr.length; i++) {
+    const book = this.myBookArr[i];
+    if (book.author.toLowerCase() !== author.toLowerCase()) {
+      keepBooks.push(book);
     }
   }
   if (keepBooks.length < this.myBookArr.length) {
     alert(this.myBookArr.length - keepBooks.length + " book(s) by " + author + " removed from the library.");
+    this.myBookArr = keepBooks;
     return true;
   }
   else {
@@ -369,8 +384,8 @@ Library.prototype.removeBookByAuthor = function(author) {
 Library.prototype._handleRemoveAuthor = function() {
   var author = $(".remove-author-input").val();
   this.removeBookByAuthor(author);
+  this._populateCatalog(this.myBookArr);
   this.populateStorage("vLibrary");
-  this._checkLocalStorage();
 };
 
 Library.prototype.init = function() {
