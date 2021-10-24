@@ -28,21 +28,23 @@
           </div>
           <h2>Manage My Library</h2>
           <div class="manage">
-            <ul role="tablist" class="nav nav-pills manage-buttons" id="pills-tab">
-              <li class="nav-item">
-                <button role="tab" class="active" aria-controls="add-book" aria-selected="true" id="add-book-tab">Add Book</button>
-              </li>
-              <li class="nav-item">
-                <button role="tab" class="addbooks-btn" aria-controls="add-books" aria-selected="false" id="add-books-tab">Add Books</button>
-              </li>
-              <li class="nav-item">
-                <button role="tab" class="title-btn" aria-controls="remove-title" aria-selected="false" id="remove-title-tab">Remove Title</button>
-              </li>
-              <li class="nav-item">
-                <button role="tab" class="author-btn" aria-controls="remove-author" aria-selected="false" id="remove-author-tab">Remove Author</button>
-              </li>
-            </ul>
-            <div class="tab-content" id="editing">
+            <div class="row" id="manage-tabs">
+              <ul role="tablist" class="nav nav-tabs tablist">
+                <li class="nav-item active" id="add-book-tab">
+                  <button role="tab" class="nav-link active" aria-controls="add-book" aria-selected="true">Add Book</button>
+                </li>
+                <li class="nav-item" id="add-books-tab">
+                  <button role="tab" class="nav-link addbooks-btn" aria-controls="add-books" aria-selected="false">Add Books</button>
+                </li>
+                <li class="nav-item" id="remove-title-tab">
+                  <button role="tab" class="nav-link title-btn" aria-controls="remove-title" aria-selected="false">Remove Title</button>
+                </li>
+                <li class="nav-item" id="remove-author-tab">
+                  <button role="tab" class="nav-link author-btn" aria-controls="remove-author" aria-selected="false">Remove Author</button>
+                </li>
+              </ul>
+            </div>
+            <div class="tab-content row" id="editing">
               <div class="tab-pane active" role="tabpanel" id="add-book" aria-labelledby="add-book-tab">
                 <form class="form-inline" id="book-form" action="index.html" method="post">
                   <input type="text" class="form-control" id="add-title" placeholder="title">
@@ -145,7 +147,7 @@
                 <label>Greater than <input type="radio" id="greater" name="pageop"></label>
               </div>
               <div class="col-sm-3">
-                <input type="text" class="form-control" id="srch-pages" placeholder="number of pages">
+                <input type="text" class="form-control" id="srch-pages" placeholder="# pages">
               </div>
             </div>
             <div class="form-group">

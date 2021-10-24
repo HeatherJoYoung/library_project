@@ -25,8 +25,11 @@ header h1 {
 }
 
 .btn-basic {
+  background-color: lightgrey;
+  border: 1px solid whitesmoke;
   color: black;
   font-size: 1em;
+  margin-top: 6px;
 }
 
 .btn-lg {
@@ -35,7 +38,7 @@ header h1 {
   width: 200px;
 }
 
-.btn-lg:hover {
+.btn-basic:hover, .btn-lg:hover {
   background-color: whitesmoke;
   border: 1px solid grey;
 }
@@ -54,6 +57,53 @@ header h1 {
   margin-bottom: 40px;
   min-height: 200px;
   padding:  20px;
+}
+
+#manage-tabs {
+  background-color: gainsboro;
+  margin: 0;
+}
+
+.nav-link {
+  background-color: transparent;
+  border: none;
+  font-weight: bold;
+  /* margin-right: 12px; */
+}
+
+.nav-item {
+  background-color: transparent;
+  text-align: center;
+  padding: 6px;
+  height: 36px;
+  width: 140px;
+}
+
+.nav-item.active {
+  background-color: #f0f0f0;
+  border: none;
+}
+
+.tab-content {
+  background-color: #f0f0f0;
+  margin-bottom: -2px;
+  padding: 6px;
+}
+
+.tab-content {
+  padding: 12px;
+}
+
+.tab-pane {
+  margin-top: 10px;
+}
+
+#editing {
+  margin: 0;
+}
+
+#multi-book-form {
+  padding: 0;
 }
 
 .well {
