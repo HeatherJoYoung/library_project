@@ -55,7 +55,7 @@
               <div class="tab-pane" role="tabpanel" id="add-books" aria-labelledby="add-books-tab">
                 <ul id="multi-book-form">
                   <li>
-                    <form class="form-inline" action="index.html" method="post">
+                    <form class="form-inline add-books-form" action="index.html" method="post">
                       <input type="text" class="form-control add-title" placeholder="title">
                       <input type="text" class="form-control add-author" placeholder="author">
                       <input type="text" class="form-control add-pages" placeholder="# of pages">
@@ -63,7 +63,7 @@
                     </form>
                   </li>
                   <li>
-                    <form class="form-inline" action="index.html" method="post">
+                    <form class="form-inline add-books-form" action="index.html" method="post">
                       <input type="text" class="form-control add-title" placeholder="title">
                       <input type="text" class="form-control add-author" placeholder="author">
                       <input type="text" class="form-control add-pages" placeholder="# of pages">
@@ -71,7 +71,7 @@
                     </form>
                   </li>
                   <li>
-                    <form class="form-inline" action="index.html" method="post">
+                    <form class="form-inline add-books-form" action="index.html" method="post">
                       <input type="text" class="form-control add-title" placeholder="title">
                       <input type="text" class="form-control add-author" placeholder="author">
                       <input type="text" class="form-control add-pages" placeholder="# of pages">
@@ -79,7 +79,7 @@
                     </form>
                   </li>
                   <li>
-                    <form class="form-inline" action="index.html" method="post">
+                    <form class="form-inline add-books-form" action="index.html" method="post">
                       <input type="text" class="form-control add-title" placeholder="title">
                       <input type="text" class="form-control add-author" placeholder="author">
                       <input type="text" class="form-control add-pages" placeholder="# of pages">
@@ -87,7 +87,7 @@
                     </form>
                   </li>
                   <li>
-                    <form class="form-inline" action="index.html" method="post">
+                    <form class="form-inline add-books-form" action="index.html" method="post">
                       <input type="text" class="form-control add-title" placeholder="title">
                       <input type="text" class="form-control add-author" placeholder="author">
                       <input type="text" class="form-control add-pages" placeholder="# of pages">
@@ -100,13 +100,13 @@
                 </ul>
               </div>
               <div class="tab-pane" id="remove-title" role="tabpanel" aria-labelledby="remove-title-tab">
-                <form class="form-inline" action="index.html" method="post">
+                <form class="form-inline" id="remove-title-form" action="index.html" method="post">
                   <input type="text" class="form-control remove-title-input" placeholder="title">
                   <button type="button" class="btn btn-basic btn-sm title-submit">Submit</button>
                 </form>
               </div>
               <div class="tab-pane" id="remove-author" role="tabpanel" aria-labelledby="remove-author-tab">
-                <form class="form-inline" action="index.html" method="post">
+                <form class="form-inline" id="remove-author-form" action="index.html" method="post">
                   <input type="text" class="form-control remove-author-input" placeholder="author">
                   <button type="button" class="btn btn-basic btn-sm author-submit">Submit</button>
                 </form>
@@ -123,33 +123,33 @@
             </div>
           </div>
           <p>Find books using one or more of the following parameters.</p>
-          <form class="form-horizontal">
+          <form class="form-horizontal" id="search-form">
             <div class="form-group">
-              <label class="control-label col-sm-3" for="srch-title">Title:</label>
+              <label class="control-label col-sm-2" for="srch-title">Title:</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="srch-title">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3" for="srch-author">Author:</label>
+              <label class="control-label col-sm-2" for="srch-author">Author:</label>
               <div class="col-sm-8">
                 <input type="text" class="form-control" id="srch-author">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3" for="srch-pages">Length:</label>
+              <label class="control-label col-sm-2" for="srch-pages">Length:</label>
               <div class="col-sm-2">
                 <label>Less than <input type="radio" id="less" name="pageop"></label>
               </div>
-              <div class="col-sm-2">
+              <div class="col-sm-3">
                 <label>Greater than <input type="radio" id="greater" name="pageop"></label>
               </div>
-              <div class="col-sm-4">
+              <div class="col-sm-3">
                 <input type="text" class="form-control" id="srch-pages" placeholder="number of pages">
               </div>
             </div>
             <div class="form-group">
-              <label class="control-label col-sm-3" for="srch-pubdate">Published:</label>
+              <label class="control-label col-sm-2" for="srch-pubdate">Published:</label>
               <div class="col-sm-2">
                 <label>Before <input type="radio" id="before" value=""></label>
               </div>
@@ -160,13 +160,20 @@
                 <input type="text" class="form-control" id="srch-pubdate" placeholder="date">
               </div>
             </div>
+            <div class="row">
+              <div class="col-xs-6">
+                <button type="button" id="reset-form">Reset Form</button>
+              </div>
+              <div class="col-xs-6">
+                <button type="button" class="btn btn-lg" id="search-submit">Search</button>
+              </div>
+            </div>
           </form>
-          <button type="submit" class="btn btn-lg col-sm-7 col-sm-offset-3" id="search-submit">Submit</button>
-          <div class="col-md-11 col-md-offset-1">
+          <div class="below-search">
             <h2>Randomness</h2>
             <p>Don't know what to read? Pull a random <a href="javascript:void(0)" class="random-author">author</a> or <a href="javascript:void(0)" class="random-title">book title</a>.</p>
           </div>
-          <div class="col-md-11 col-md-offset-1">
+          <div class="below-search">
             <h2>List of Authors</h2>
             <p>Pull a <a href="javascript:void(0)" class="author-list">list of authors</a> from our catalog.</p>
           </div>

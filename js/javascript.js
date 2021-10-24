@@ -14,16 +14,16 @@ var pageMatch = null;
 
 Library.prototype.myBookArr = [];
 
-window.bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "08/16/1860"});
-window.bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "05/06/1999"});
-window.bookThree = new Book({title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "11/01/1939"});
-window.bookFour = new Book({title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "09/10/1939"});
-window.bookFive = new Book({title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "12/21/2005"});
-window.bookSix = new Book({title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "12/07/1980"});
-window.bookSeven = new Book({title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "08/31/1993"});
-window.bookEight = new Book({title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "07/01/1975"});
-window.bookNine = new Book({title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "12/10/1955"});
-window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "03/01/1976"});
+window.bookOne = new Book({title: "The Woman in White", author: "Wilkie Collins", numPages: 672, pubDate: "1860-08-16"});
+window.bookTwo = new Book({title: "A Crime in the Neighborhood", author: "Suzanne Berne", numPages: 245, pubDate: "1999-05-06"});
+window.bookThree = new Book({title: "The Confidential Agent", author: "Graham Greene", numPages: 247, pubDate: "1939-11-01"});
+window.bookFour = new Book({title: "Demetrios", author: "Eric Ambler", numPages: 192, pubDate: "1939-09-10"});
+window.bookFive = new Book({title: "True Confession", author: "John Gregory Dunne", numPages: 352, pubDate: "2005-12-21"});
+window.bookSix = new Book({title: "The Eye of the Beholder", author: "Marc Behm", numPages: 192, pubDate: "1980-12-07"});
+window.bookSeven = new Book({title: "A Simple Plan", author: "Scott Smith", numPages: 335, pubDate: "1993-08-31"});
+window.bookEight = new Book({title: "Sneaky People", author: "Thomas Berger", numPages: 320, pubDate: "1975-07-01"});
+window.bookNine = new Book({title: "The Quiet American", author: "Graham Greene", numPages: 180, pubDate: "1955-12-10"});
+window.bookTen = new Book({title: "Cutter and Bone", author: "Newton Thornburg", numPages: 320, pubDate: "1976-03-01"});
 
 Library.prototype._bindEvents = function() {
   $("#search-submit").on("click", $.proxy(this._submitSearchData, this));
@@ -35,6 +35,7 @@ Library.prototype._bindEvents = function() {
   $(".addbooks-submit").on("click", $.proxy(this._handleAddBooks, this));
   $(".title-submit").on("click", $.proxy(this._handleRemoveTitle, this));
   $(".author-submit").on("click", $.proxy(this._handleRemoveAuthor, this));
+  $("#reset-form").on("click", $.proxy(this._resetSearchForm, this));
   $(".random-author").on("click", $.proxy(this._handleRandomAuthor, this));
   $(".random-title").on("click", $.proxy(this._handleRandomTitle, this));
   $(".author-list").on("click", $.proxy(this._handleAuthorList, this));
@@ -159,10 +160,8 @@ Library.prototype._compare = function(obj) {
     authorResults = false;
   }
 
-  if (results.length > 0) {
     this._populateSearchResults(results);
-  }
-  else {
+  if (results.length === 0) {
     alert("No matches found.");
   }
 }
@@ -183,6 +182,11 @@ Library.prototype._populateSearchResults = function(results) {
     $table.append(newRow);
   };
 };
+
+Library.prototype._resetSearchForm = function() {
+  const searchForm = document.getElementById("search-form");
+  searchForm.reset();
+}
 
 Library.prototype.getRandomBook = function() {
   var length = this.myBookArr.length;
@@ -261,30 +265,6 @@ Library.prototype._toggleManageLibraryTabs = function (e) {
   })
 }
 
-// Library.prototype._toggleAddBook = function () {
-//   $(".addbook-btn").click(function() {
-//     $("#book-form").toggle();
-//   });
-// }
-
-// Library.prototype._toggleAddBooks = function () {
-//   $(".addbooks-btn").click(function() {
-//     $("#multi-book-form").toggle();
-//   });
-//   }
-
-// Library.prototype._toggleRemoveTitle = function () {
-//   $(".title-btn").click(function() {
-//     $("#remove-title").toggle();
-//   });
-//   }
-
-// Library.prototype._toggleRemoveAuthor = function () {
-//   $(".author-btn").click(function() {
-//     $("#remove-author").toggle();
-//   });
-//   }
-
 Library.prototype.addBook = function(book) {
 
   for (j = 0; j < this.myBookArr.length; j++) {
@@ -293,6 +273,7 @@ Library.prototype.addBook = function(book) {
       }
     }
     this.myBookArr.push(book);
+    return true;
 };
 
 Library.prototype.addBooks = function(booksArray) {
@@ -319,7 +300,7 @@ Library.prototype._handleAddBook = function() {
   } else {
     alert("Title field must be filled out.");
   }
-  $("#book-form").toggle();
+  document.getElementById("book-form").reset();
 };
 
 Library.prototype._handleAddBooks = function () {
@@ -329,8 +310,8 @@ Library.prototype._handleAddBooks = function () {
       var newBook = {
         title: $(this).find("input.add-title").val(),
         author: $(this).find("input.add-author").val(),
-        pages: $(this).find("input.add-pages").val(),
-        date: $(this).find("input.add-date").val()
+        numPages: $(this).find("input.add-pages").val(),
+        pubDate: $(this).find("input.add-date").val()
       };
       books.push(newBook);
     }
@@ -338,7 +319,10 @@ Library.prototype._handleAddBooks = function () {
   this.addBooks(books);
   this.populateStorage("vLibrary");
   this._checkLocalStorage();
-  $("#multi-book-form").toggle();
+  const forms = document.getElementsByClassName("add-books-form");
+  for (f of forms) {
+    f.reset();
+  };
 };
 
 Library.prototype.removeBookByTitle = function(title) {
@@ -347,7 +331,6 @@ Library.prototype.removeBookByTitle = function(title) {
       this.myBookArr.splice(i, 1);
       alert(title + " was removed from the library.");
       return true;
-      $("#remove-title").toggle();
     }
   }
   alert("There are no books in the library with this title.");
@@ -359,6 +342,7 @@ Library.prototype._handleRemoveTitle = function() {
   this.removeBookByTitle(title);
   this.populateStorage("vLibrary");
   this._checkLocalStorage();
+  document.getElementById("remove-title-form").reset();
 };
 
 Library.prototype.removeBookByAuthor = function(author) {
@@ -386,6 +370,7 @@ Library.prototype._handleRemoveAuthor = function() {
   this.removeBookByAuthor(author);
   this._populateCatalog(this.myBookArr);
   this.populateStorage("vLibrary");
+  document.getElementById("remove-author-form").reset();
 };
 
 Library.prototype.init = function() {

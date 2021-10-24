@@ -27,7 +27,17 @@ header h1 {
 .btn-basic {
   color: black;
   font-size: 1em;
-  font-weight: bold;
+}
+
+.btn-lg {
+  background-color: lightgrey;
+  border: 1px solid whitesmoke;
+  width: 200px;
+}
+
+.btn-lg:hover {
+  background-color: whitesmoke;
+  border: 1px solid grey;
 }
 
 .col {
@@ -57,10 +67,22 @@ header h1 {
 .results {
   font-size: 1.2em;
   font-family: Courier;
+  margin-bottom: 40px;
 }
 
 .results h3 {
   color: darkGray;
+}
+
+#reset-form {
+  border: none;
+  background-color: transparent;
+  color: #337ab7;
+  font-weight: bold;
+}
+
+.below-search {
+  margin-top: 40px;
 }
 
 .lower .well {
